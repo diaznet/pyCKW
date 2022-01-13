@@ -34,7 +34,7 @@ def validate_absolute_date(dt):
         raise ValueError("Incorrect data format, should be {}.".format(dt_format))
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description='Fetches consumption Data from myCKW. and pretty-prints it.')
+    parser = argparse.ArgumentParser(description='Fetches consumption Data from myCKW and pretty-prints it.')
     
     # Optional Arguments
     parser.add_argument(

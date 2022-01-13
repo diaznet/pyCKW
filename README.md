@@ -138,9 +138,9 @@ It can also be used to fetch the data by yourself if you do not want to rewrite 
 
 ```bash
 [user@host ~]$ python pyCKWCLI.py -h
-usage: pyCKWCLI.py [-h] [-v {CRITICAL,ERROR,WARNING,INFO,DEBUG,NOTSET}] [-V] -c CLIENT_NUMBER -m METER_POINT
-                   -r {year,month,week,day,hour,minute} [-i RELATIVE_INTERVAL] [--start-date START_DATE]
-                   [--end-date END_DATE]
+usage: pyCKWCLI.py [-h] [-v {CRITICAL,ERROR,WARNING,INFO,DEBUG,NOTSET}] [-V] -c CLIENT_NUMBER
+                   -m METER_POINT -r {year,month,week,day,hour,minute} [-i RELATIVE_INTERVAL]
+                   [--start-date START_DATE] [--end-date END_DATE]
 
 Fetches consumption Data from myCKW and pretty-prints it.
 

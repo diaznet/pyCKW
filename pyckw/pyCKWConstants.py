@@ -11,7 +11,7 @@
 
 # The wrapper name and version
 WRAPPER_NAME = 'pyCKW'
-WRAPPER_VERSION = '0.1'
+WRAPPER_VERSION = '0.2'
 
 # Constants for Data resolutions and their respective paths
 RESOLUTIONS = {

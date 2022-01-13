@@ -2,13 +2,13 @@ from distutils.core import setup
 setup(
   name = 'pyCKW',
   packages = ['pyCKW'],
-  version = '0.1',
+  version = '0.2-1',
   license='MIT',
   description = 'Access your myCKW smartmeter data.',
-  author = 'jeremy Diaz',
+  author = 'Jeremy Diaz',
   author_email = 'jd@diaznet.fr',
   url = 'https://github.com/diaznet/pyCKW',
-  download_url = 'https://github.com/diaznet/pyCKW/archive/pyCKW-0.1.tar.gz',
+  download_url = 'https://github.com/diaznet/pyCKW/archive/pyCKW-0.2.tar.gz',
   keywords = ['myCKW', 'smartmeter', 'data', 'power', 'consumption'],
   install_requires=[
       ],

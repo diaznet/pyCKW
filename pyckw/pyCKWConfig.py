@@ -18,7 +18,7 @@ from pyckw.pyCKWConstants import (
 )
 
 class pyCKWConfig(object):
-    def __init__(self, pyCKW, meter_point, client_number, **kwargs):
+    def __init__(self, pyCKW, meter_point, client_number, token, **kwargs):
         """The constructor.
         Args:
             kwargs (kwargs): Configuration options.
@@ -27,6 +27,7 @@ class pyCKWConfig(object):
         self.config = kwargs
         self.config['meter_point'] = meter_point
         self.config['client_number'] = client_number
+        self.config['token'] = token
         self.pyCKW.info("Config loaded.")
 
     def dump_config(self):
@@ -52,3 +53,7 @@ class pyCKWConfig(object):
     @property
     def client_number(self):
         return self.config.get("client_number")
+
+    @property
+    def token(self):
+        return self.config.get("token")

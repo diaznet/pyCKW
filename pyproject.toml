@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyckw"
+dynamic = ["version"]  # Version will be retrieved dynamically
+description = "Access your myCKW smartmeter data."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Jeremy Diaz", email = "jd@diaznet.fr"}
+]
+dependencies = []
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.7"
+]
+
+[project.urls]
+Homepage = "https://github.com/diaznet/pyCKW"
+Download = "https://github.com/diaznet/pyCKW/archive/main.tar.gz"
+
+[tool.setuptools]
+packages = ["pyCKW"]
+
+[tool.setuptools.dynamic]
+version = {attr = "pyCKW.__version__"}  # Read version from package

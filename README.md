@@ -1,13 +1,15 @@
 # pyCKW
 Access your myCKW smartmeter data.
 
+> ⚠️ **Warning:** This project is in its current form not working anymore as CKW migrated to a new portal and API in Azure. A new version will be released soon.
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Companion CLI Application](#companion)
-- [Note](#note)
+- [Notes](#notes)
 - [Todo's](#todos)
 - [Disclaimer](#disclaimer)
 - [Credits](#credits)
@@ -79,8 +81,9 @@ end_date = datetime.strptime('20211212', '%Y%m%d')
 # Instantiate a pyCKW object 
 ckw = pyCKW(
     client_number='0001234567',
-    meter_point='CH0009801234500000000000000054321'
-    )
+    meter_point='CH0009801234500000000000000054321',
+    token='bmljZV90cnk='
+)
 
 # Get the consumption data
 consumption_data = ckw.get_consumption(
@@ -167,6 +170,11 @@ required arguments:
 [user@host ~]$ 
 ```
 
+### API Token
+
+The CLI companion app expects to find an environnement variable named `MYCKW_API_TOKEN`. Set this environnement variable with your API token.
+See note below.
+
 ### Example
 
 ```bash
@@ -174,48 +182,69 @@ required arguments:
                 -c 0001234567                           \
                 -m CH0009801234500000000000000054321    \
                 -r day                                  \
-                --start-date 20220111                   \
-                --end-date 20220112
-[   {   'end_date': 'Tue, 11 Jan 2022 23:00:00 GMT',
-        'max_physical_power': 2.5360000133514404,
-        'max_power': 2.5360000133514404,
-        'qty_invoiced_offpeak': 5.169999994337559,
-        'qty_invoiced_peak': 11.194000013172626,
-        'qty_measured': 16.364000007510185,
-        'qty_reactive_invoiced_offpeak': None,
-        'qty_reactive_invoiced_peak': None,
-        'qty_reactive_offpeak': None,
-        'qty_reactive_peak': None,
-        'start_date': 'Mon, 10 Jan 2022 23:00:00 GMT'},
-    {   'end_date': 'Wed, 12 Jan 2022 23:00:00 GMT',
-        'max_physical_power': 11.64799976348877,
-        'max_power': 11.64799976348877,
-        'qty_invoiced_offpeak': 9.262999959290028,
-        'qty_invoiced_peak': 12.256000146269798,
-        'qty_measured': 21.519000105559826,
-        'qty_reactive_invoiced_offpeak': None,
-        'qty_reactive_invoiced_peak': None,
-        'qty_reactive_offpeak': None,
-        'qty_reactive_peak': None,
-        'start_date': 'Tue, 11 Jan 2022 23:00:00 GMT'}]
-Fetched 2 data points in 1.06 seconds.
+                --start-date 20241113                   \
+                --end-date 20241114
+[
+    {
+        "qty_peak": 1.8070140036493543,
+        "qty_offpeak": 4.028123970359564,
+        "qty_reactive_peak": null,
+        "qty_reactive_offpeak": null,
+        "qty_invoiced_peak": 7.467000015079975,
+        "qty_invoiced_offpeak": 19.553999856114388,
+        "qty_reactive_invoiced_peak": null,
+        "qty_reactive_invoiced_offpeak": null,
+        "qty_measured": 27.020999871194363,
+        "max_power": 12.076000213623047,
+        "max_physical_power": 12.076000213623047,
+        "end_date": "2024-11-14T23:00:00",
+        "start_date": "2024-11-13T23:00:00"
+    },
+    {
+        "qty_peak": 2.583592028617859,
+        "qty_offpeak": 1.0736720056235791,
+        "qty_reactive_peak": null,
+        "qty_reactive_offpeak": null,
+        "qty_invoiced_peak": 10.676000118255615,
+        "qty_invoiced_offpeak": 5.212000027298927,
+        "qty_reactive_invoiced_peak": null,
+        "qty_reactive_invoiced_offpeak": null,
+        "qty_measured": 15.888000145554543,
+        "max_power": 2.01200008392334,
+        "max_physical_power": 2.01200008392334,
+        "end_date": "2024-11-13T23:00:00",
+        "start_date": "2024-11-12T23:00:00"
+    }
+]
+Fetched 2 data points in 3.56 seconds.
 [user@host ~]$
 ```
 
-<a name="note"></a>
+<a name="notes"></a>
 
-## Note
+## Notes
 
-There seems to be at the time of writing (January 2022) a delay of 7 hours between the measures from your smart meter and the actual time they are returned by the API.  
+### Delays
+There seems to be still at the time of writing (April 2025) a delay of 7 hours between the measures from your smart meter and the actual time they are returned by the API.
 Hopefully the utility provider improves this gap soon!
+
+### API Token
+Since 2023 the utility provider has implemented authentication via JWT / Bearer token. This is a good move as this allows your data to remain private.
+Version 0.3 of the library now supports token specified via class instantiation, see [Usage](#usage).
+
+CLI Companion app supports it currently only via environment variable.
+To get this token, go to [MyCKW Consumption] page, Developer Tools with your browser , Network tab and check for a 'day' request. In the Headers tab, in Requests headers, look for 'Authorization'. The string after "Bearer" is your token. Note that the token is valid for 5 minutes.
+
 
 <a name="todos"></a>
 
 ## Todo's
   - Finish documentation
   - Improve logging in various places
+  - Handle OAUTH in CLI companion app
 
 <a name="disclaimer"></a>
+
 ## Disclaimer
 
 This application comes without warranty.

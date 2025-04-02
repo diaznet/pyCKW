@@ -3,15 +3,11 @@
 
 """ pyCKWConstants.py
     Define constants for the wrapper.
-    In case some values need to be add/removed/updated this is a central point to perform changes.
+    In case some values need to be added/removed/updated, this is a central point to perform changes.
 
     Author: Jeremy Diaz
     Year:   2022
 """
-
-# The wrapper name and version
-WRAPPER_NAME = 'pyCKW'
-WRAPPER_VERSION = '0.2'
 
 # Constants for Data resolutions and their respective paths
 RESOLUTIONS = {
@@ -31,15 +27,17 @@ RESOLUTIONS = {
 #   anzahl_linien_p
 
 DATA_TRANSLATIONS = {
+    'betrag_ht': 'qty_peak',
+    'betrag_nt': 'qty_offpeak',
     'betrag_blind_ht': 'qty_reactive_peak',
     'betrag_blind_nt': 'qty_reactive_offpeak',
-    'menge_fakturiert_blind_ht': 'qty_reactive_invoiced_peak',
-    'menge_fakturiert_blind_nt': 'qty_reactive_invoiced_offpeak',
-    'max_leistung_faktura': 'max_power',
-    'max_leistung_physisch': 'max_physical_power',
     'menge_fakturiert_ht': 'qty_invoiced_peak',
     'menge_fakturiert_nt': 'qty_invoiced_offpeak',
+    'menge_fakturiert_blind_ht': 'qty_reactive_invoiced_peak',
+    'menge_fakturiert_blind_nt': 'qty_reactive_invoiced_offpeak',
     'menge_physikalisch': 'qty_measured', 
+    'max_leistung_faktura': 'max_power',
+    'max_leistung_physisch': 'max_physical_power',
     'zeitstempel_bis_utc': 'end_date',
     'zeitstempel_von_utc': 'start_date',
 }
@@ -50,4 +48,7 @@ FORMAT_DATES = '%Y%m%d'
 ## User-configurable defaults via configurable values
 # Connection Defaults
 DEFAULT_HOST = "https://etility.ckw.ch"
-DEFAULT_SMARTMETER_PATH = "/etility/proxy/ckw/serviceAzureDA/smartmeter/zp"
+DEFAULT_SMARTMETER_PATH = "/etility/proxy/ckw/serviceDA"
+
+# The token type to be included in API calls
+TOKEN_TYPE = "Bearer"

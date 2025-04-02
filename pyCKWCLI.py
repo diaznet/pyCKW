@@ -6,7 +6,7 @@
     It can also be used as an example on how to use the wrapper.
 
     Author: Jeremy Diaz
-    Year:   2022
+    Year:   2022-2025
 """
 
 # Python Standard Library general imports
@@ -14,7 +14,8 @@ import time
 start_time = time.time()
 import logging
 import argparse
-import pprint
+import json
+import os
 
 # Python Standard Library specific imports
 from datetime import datetime, timedelta
@@ -116,6 +117,9 @@ if __name__ == "__main__":
             datefmt="%Y-%m-%dT%H:%M:%S%z"
         )
 
+        if not os.getenv('MYCKW_API_TOKEN'):
+            raise EnvironmentError('MYCKW_API_TOKEN environment variable not set. Please set it to your API token.')
+
         # We have to manage an interval
         if arguments.relative_interval:
             end_date = datetime.now()
@@ -127,7 +131,8 @@ if __name__ == "__main__":
         # Instantiate a pyCKW object 
         ckw = pyCKW(
             client_number=arguments.client_number,
-            meter_point=arguments.meter_point
+            meter_point=arguments.meter_point,
+            token=os.getenv('MYCKW_API_TOKEN')
         )
 
         # Get the consumption data
@@ -138,8 +143,7 @@ if __name__ == "__main__":
         ) 
 
         # Pretty-Print the results
-        pp = pprint.PrettyPrinter(indent=4, depth=6)
-        pp.pprint(my_consumption)
+        print(json.dumps(my_consumption, indent=4))
         print('Fetched {} data points in {} seconds.'.format(len(my_consumption), round(time.time() - start_time, 2)))
 
     finally:

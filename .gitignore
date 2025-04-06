@@ -1,3 +1,4 @@
 pyckw/__pycache__/
 pyCKW.egg-info/
 dist/
+.venv/
